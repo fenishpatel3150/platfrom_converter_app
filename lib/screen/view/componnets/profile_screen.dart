@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:platfrom_converter_app/screen/provider/Profile_imagepicker_provider.dart';
+import 'package:platfrom_converter_app/screen/provider/list_screen.dart';
 import 'package:platfrom_converter_app/screen/provider/profile_provider.dart';
 import 'package:platfrom_converter_app/screen/provider/thememode_provider.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,9 @@ class profile_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final listtrue = Provider.of<List_screen>(context, listen: true);
+    final listfalse = Provider.of<List_screen>(context, listen: false);
     return Column(
       children: [
         ListTile(
@@ -55,6 +59,8 @@ class profile_screen extends StatelessWidget {
               height: 20,
             ),
             TextFormField(
+              controller: listtrue.name,
+              textAlign: TextAlign.center,
               decoration: InputDecoration.collapsed(
                 hintText: 'Enter your Name...',
               ),
@@ -63,14 +69,28 @@ class profile_screen extends StatelessWidget {
               height: 20,
             ),
             TextFormField(
+              controller: listtrue.msg,
+              textAlign: TextAlign.center,
               decoration: InputDecoration.collapsed(
                 hintText: 'Enter you Bio....',
               ),
             ),
+            SizedBox(height: 20,),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
-                    onPressed: () {}, child: Text('Save')),
+                    onPressed: () {
+
+                      Addlist add = Addlist(
+                        image:listtrue.image, name:listtrue.name.text, number: listtrue.number.text,
+                        msg: listtrue.msg.text,
+                        timeOfDay: listtrue.Time,
+                        dateTime: listtrue.time,
+                      );
+                      listfalse.listmodel(add);
+
+                    }, child: Text('Save')),
                 ElevatedButton(
                     onPressed: () {}, child: Text('Clear')),
               ],

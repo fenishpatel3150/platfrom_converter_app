@@ -1,24 +1,24 @@
 
 import 'package:contained_tab_bar_view/contained_tab_bar_view.dart';
-import 'package:date_picker_plus/date_picker_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:platfrom_converter_app/screen/provider/Profile_imagepicker_provider.dart';
 import 'package:platfrom_converter_app/screen/provider/Screen_provider.dart';
-import 'package:platfrom_converter_app/screen/provider/image_picker_provider.dart';
-import 'package:platfrom_converter_app/screen/provider/profile_provider.dart';
-import 'package:platfrom_converter_app/screen/provider/thememode_provider.dart';
 import 'package:platfrom_converter_app/screen/view/componnets/bio_data_ios.dart';
+import 'package:platfrom_converter_app/screen/view/componnets/call_screen.dart';
+import 'package:platfrom_converter_app/screen/view/componnets/chat_screen.dart';
 import 'package:platfrom_converter_app/screen/view/componnets/person_bio_data.dart';
 import 'package:platfrom_converter_app/screen/view/componnets/profile_screen.dart';
 import 'package:provider/provider.dart';
+
+import 'componnets/setting_screen.dart';
 
 class home_screen extends StatelessWidget {
   const home_screen({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+
     if (Provider.of<platfrom_provider>(context).isswitch) {
       return Scaffold(
           appBar: AppBar(
@@ -42,8 +42,8 @@ class home_screen extends StatelessWidget {
             ],
             views: [
               person_biodata(),
-              Center(child: Text('home')),
-              Center(child: Text('home')),
+              Chat_Screen(),
+              Call_Screen(),
               profile_screen(),
             ],
           ));
@@ -71,70 +71,11 @@ class home_screen extends StatelessWidget {
               if (index == 0) {
                 return bio_data_ios();
               } else if (index == 1) {
-                return Column(
-                  children: [
-                    
-                  ],
-                );
+                return Chat_Screen();
               } else if (index == 2) {
-                return Column(
-                  children: [
-
-                  ],
-                );
+                return Call_Screen();
               } else if (index == 3) {
-                return Column(
-                  children: [
-                    CupertinoListTile(
-                        leading: Icon(Icons.person),
-                        title: Text('Profile'),
-                        subtitle: Text('Update Profile Data'),
-                      trailing: CupertinoSwitch(value: Provider.of<profile_provider>(context).isprofile, onChanged: (value) {
-                        Provider.of<profile_provider>(context, listen: false)
-                            .showprofile(value);
-                      },),
-                    ),
-                    (Provider.of<profile_provider>(context).isprofile)
-                        ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            CircleAvatar(radius: 50,
-                              child: Icon(CupertinoIcons.camera),
-                            ),
-                            CupertinoTextFormFieldRow(
-                            enabled: true,
-                              placeholder: 'Enter Your Name .....',
-                            ),
-                            CupertinoTextFormFieldRow(
-                              enabled: true,
-                              placeholder: 'Enter your Bio .....',
-                            ),
-                            Row(
-                              children: [
-                                CupertinoButton(child: Text('Save'), onPressed: ()
-                                {
-
-                                }),
-                                CupertinoButton(child: Text('Clear'), onPressed: ()
-                                {
-
-                                }),
-                              ],
-                            )
-                          ],
-                        )
-                        : Container(),
-                    CupertinoListTile(
-                        leading: Icon(Icons.sunny),
-                        title: Text('Theme'),
-                        subtitle: Text('Chanage Theme'),
-                      trailing: CupertinoSwitch(value: Provider.of<themmode_provider>(context).isdark, onChanged: (value) {
-                        Provider.of<themmode_provider>(context,listen: false).chnagetheme(value);
-                      },),
-                    ),
-
-                  ],
-                );
+                return Setting_screen();
               } else {
                 return Text('hello');
               }
@@ -144,5 +85,7 @@ class home_screen extends StatelessWidget {
       );
     }
   }
+
+
 
 }

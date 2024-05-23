@@ -23,8 +23,8 @@ class Adaptive_screen extends StatelessWidget {
           )
         : CupertinoApp(
             theme: Provider.of<themmode_provider>(context).isdark
-                ? CupertinoThemeData(brightness: Brightness.light)
-                : CupertinoThemeData(brightness: Brightness.dark),
+                ? CupertinoThemeData(brightness: Brightness.dark)
+                : CupertinoThemeData(brightness: Brightness.light),
             home: home_screen(),
             debugShowCheckedModeBanner: false,
           );
