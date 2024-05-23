@@ -46,7 +46,7 @@ class person_biodata extends StatelessWidget {
               Icon(Icons.person),
               SizedBox(
                   height: 50,
-                  width: 330,
+                  width: 300,
                   child: TextField(
                     controller: listtrue.name,
                     decoration: InputDecoration(
@@ -71,7 +71,7 @@ class person_biodata extends StatelessWidget {
               Icon(Icons.phone),
               SizedBox(
                   height: 50,
-                  width: 330,
+                  width: 300,
                   child: TextField(
                     controller: listtrue.number,
                     decoration: InputDecoration(
@@ -95,7 +95,7 @@ class person_biodata extends StatelessWidget {
               Icon(Icons.message),
               SizedBox(
                   height: 50,
-                  width: 330,
+                  width: 300,
                   child: TextField(
                     controller: listtrue.msg,
                     decoration: InputDecoration(
@@ -163,7 +163,8 @@ class person_biodata extends StatelessWidget {
           InkWell(
             onTap: () {
               Addlist add = Addlist(
-                  image:listtrue.image, name:listtrue.name.text, number: listtrue.number.text,
+                  image:listtrue.image,
+                name:listtrue.name.text, number: listtrue.number.text,
                   msg: listtrue.msg.text,
                   timeOfDay: listtrue.Time,
                   dateTime: listtrue.time,

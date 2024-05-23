@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:platfrom_converter_app/screen/provider/image_picker_provider.dart';
+import 'package:platfrom_converter_app/screen/provider/list_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/profile_provider.dart';
@@ -10,6 +12,9 @@ class Setting_screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final listtrue = Provider.of<List_screen>(context, listen: true);
+    final listfalse = Provider.of<List_screen>(context, listen: false);
     return Column(
       children: [
         CupertinoListTile(
@@ -26,13 +31,18 @@ class Setting_screen extends StatelessWidget {
           children: [
             CircleAvatar(radius: 50,
               child: Icon(CupertinoIcons.camera),
+              backgroundImage: FileImage(Provider
+                  .of<imagepicker_provider>(context)
+                  .imgpath!),
             ),
             CupertinoTextFormFieldRow(
+              controller: listtrue.name,
               textAlign: TextAlign.center,
               enabled: true,
               placeholder: 'Enter Your Name .....',
             ),
             CupertinoTextFormFieldRow(
+              controller: listtrue.msg,
               textAlign: TextAlign.center,
               enabled: true,
               placeholder: 'Enter your Bio .....',
@@ -43,6 +53,13 @@ class Setting_screen extends StatelessWidget {
                 CupertinoButton(child: Text('Save'), onPressed: ()
                 {
 
+                  Addlist add = Addlist(
+                    image:listtrue.image, name:listtrue.name.text, number: listtrue.number.text,
+                    msg: listtrue.msg.text,
+                    timeOfDay: listtrue.Time,
+                    dateTime: listtrue.time,
+                  );
+                  listfalse.listmodel(add);
                 }),
                 CupertinoButton(child: Text('Clear'), onPressed: ()
                 {
